@@ -11,6 +11,10 @@
     <string name="button_cancle">Cancle</string>
     <string name="message_please_wait">Please wait..</string>
     <string name="message_processing">Processing</string>
-    
+    <string name="main_menu_title">Main Menu</string>
+    <string name="menu_checklist">Checklist</string>
+  	<string name="menu_bpartner">BPartner</string>
+  	<string name="left_and_right">Left and Right</string>
+  	
 
 </resources>

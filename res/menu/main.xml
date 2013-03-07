@@ -4,11 +4,13 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:showAsAction="ifRoom"
-        android:title="@string/action_settings"/>
+        android:title="@string/action_settings"
+        />
     <item
         android:id="@+id/action_load_sample_data"
         android:orderInCategory="101"
         android:showAsAction="ifRoom"
-        android:title="@string/action_load_sample_data"/>
+        android:title="@string/action_load_sample_data"
+        />
 
 </menu>
