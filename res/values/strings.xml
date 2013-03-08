@@ -9,6 +9,8 @@
     <string name="load_sample_data_message">All your data will be deleted, are you sure?</string>
     <string name="button_ok">OK</string>
     <string name="button_cancle">Cancle</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_new">New</string>
     <string name="message_please_wait">Please wait..</string>
     <string name="message_processing">Processing</string>
     <string name="main_menu_title">Main Menu</string>
@@ -21,9 +23,14 @@
   	<string name="address">Address</string>
   	<string name="phone">Phone</string>
   	<string name="button_save">Save</string>
-  	
+  	<string name="button_discard">Discard</string>
+  	<string name="bpartner_title">Business Partner Info</string>
   	<string name="dialog_title_confirm_save">Save</string>
   	<string name="dialog_message_confirm_save">Save information?</string>
+  	<string name="dialog_title_error">Error</string>
+  	<string name="dialog_message_require_company_name_error">Please enter the company\'s name</string>
+  	<string name="dialog_title_confirm_delete">Delete</string>
+  	<string name="dialog_message_confirm_delete">Delete this record?</string>
   	
 
 </resources>

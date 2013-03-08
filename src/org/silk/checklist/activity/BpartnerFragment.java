@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,7 +24,7 @@ public class BpartnerFragment extends Fragment implements OnItemClickListener{
 	private BpAdapter mAdapter;
 	private ListView lvList;
 	private BpartnerBook mBpBook;
-
+	private Button btnNew;
 	
 
 
@@ -30,6 +32,15 @@ public class BpartnerFragment extends Fragment implements OnItemClickListener{
 		mBpBook = new BpartnerBook(getActivity().getApplicationContext());
 		
 		View view = inflater.inflate(R.layout.bpartner_list, null);
+		btnNew = (Button) view.findViewById(R.id.btnNew);
+		btnNew.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				editBpartner(-1);
+			}
+		});
 		lvList = (ListView) view.findViewById(R.id.list);
 		mAdapter = new BpAdapter();
 		lvList.setAdapter(mAdapter);
@@ -103,11 +114,14 @@ public class BpartnerFragment extends Fragment implements OnItemClickListener{
 	
 	@Override
 	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-	
+		editBpartner(id);
+	}
+
+
+	private void editBpartner(long id) {
 		Intent intent = new Intent(getActivity(),BpartnerDetailActivity.class);
 		intent.putExtra("bpartnerId", id);
 		startActivityForResult(intent, BPARTNER_DETAIL);
-		
 	}
 	
 	public static final int BPARTNER_DETAIL = 100;

@@ -25,6 +25,8 @@ public class BpartnerBook {
 		// TODO Auto-generated method stub
 		return bpDao.get(position);
 	}
-	
+	public void addBpartner(Bpartner bpartner){
+		bpDao.insert(bpartner);
+	}
 	
 }
