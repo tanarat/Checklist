@@ -17,5 +17,13 @@
   	<string name="left_and_right">Left and Right</string>
   	<string name="business_partner">Business Partner</string>
   	<string name="checklist">Checklist</string>
+  	<string name="company_name">Company Name</string>
+  	<string name="address">Address</string>
+  	<string name="phone">Phone</string>
+  	<string name="button_save">Save</string>
+  	
+  	<string name="dialog_title_confirm_save">Save</string>
+  	<string name="dialog_message_confirm_save">Save information?</string>
+  	
 
 </resources>

@@ -3,7 +3,9 @@ package org.silk.checklist.activity;
 import org.silk.checklist.ChecklistApp;
 import org.silk.checklist.LoadSampleDataTask;
 import org.silk.checklist.R;
+import org.silk.checklist.activity.BpartnerFragment.BpartnerListener;
 import org.silk.checklist.activity.ListMenuFragment.OnListMenuSelectedListener;
+import org.silk.checklist.model.Bpartner;
 import org.silk.checklist.model.ModelBase;
 
 import android.app.AlertDialog;
@@ -22,7 +24,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class MainActivity extends SlidingFragmentActivity implements OnListMenuSelectedListener {
+public class MainActivity extends SlidingFragmentActivity implements OnListMenuSelectedListener{
 	String tag = "MainActivity";
 	ListMenuFragment menuFrag;
 	Fragment contentFrag;
@@ -30,11 +32,13 @@ public class MainActivity extends SlidingFragmentActivity implements OnListMenuS
 
 	FragmentTransaction t;
 
+	private BpartnerFragment bpFragment;
+	
 	public MainActivity() {
 		// super(R.string.app_name);
 		// TODO Auto-generated constructor stub
 		Log.i(tag, "constructor");
-
+	
 	}
 
 	@Override
@@ -43,9 +47,15 @@ public class MainActivity extends SlidingFragmentActivity implements OnListMenuS
 		Log.i(tag, "onCreate");
 		// set the Content View
 		setContentView(R.layout.activity_main);
+		
+		if(savedInstanceState != null){
+			contentFrag = getSupportFragmentManager().getFragment(savedInstanceState, "contentFragment"); 
+		}else{
+			contentFrag = new SampleListFragment();
+		}
 		getSupportFragmentManager()
 		.beginTransaction()
-		.replace(R.id.content_frame, new SampleListFragment())
+		.replace(R.id.content_frame, contentFrag)
 		.commit();
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
@@ -53,6 +63,19 @@ public class MainActivity extends SlidingFragmentActivity implements OnListMenuS
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		menuFrag.setOnListMenuSelectedListener(this);
+		
+		
+		bpFragment = new BpartnerFragment();
+		
+	}
+
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+		getSupportFragmentManager().putFragment(outState, "contentFragment", contentFrag);
+		System.out.println("...............main..........");
 	}
 
 	private void initSlidingMenu() {
@@ -91,37 +114,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnListMenuS
 	}
 	
 
-//	@Override
-//	public void onLeftMenuItemSelected(long id) {
-//		// TODO Auto-generated method stub
-//		toggle();
-//		if (id == 0) {
-//			currentFragment = contentFrags[0];
-//		}
-//		if (id == 1) {
-//			currentFragment = contentFrags[1];
-//		} else if (id == 2) {
-//			currentFragment = contentFrags[2];
-//		}
-//
-//		updateContentFragment();
-//		
-//	}
 
-//	@Override
-//	public void onItemSelected(long id) {
-//		// TODO Auto-generated method stub
-//
-//		currentFragment = new PlaceDetailFragment();
-//		updateContentFragment();
-//	}
-//
-//	private void updateContentFragment() {
-//		t = this.getSupportFragmentManager().beginTransaction();
-//		t.replace(R.id.contentFragment, currentFragment);
-//		t.addToBackStack("a");
-//		t.commit();
-//	}
 	private void loadSampleData() {
 		final ProgressDialog mProgressDialog = new ProgressDialog(
 				MainActivity.this);
@@ -162,7 +155,7 @@ public class MainActivity extends SlidingFragmentActivity implements OnListMenuS
 				}).setNegativeButton(R.string.button_cancle, null).show();
 
 	}
-
+	
 	@Override
 	public void onListMenuSelected(int position) {
 		// TODO Auto-generated method stub
@@ -174,14 +167,20 @@ public class MainActivity extends SlidingFragmentActivity implements OnListMenuS
 			break;
 		case 1:
 			Toast.makeText(getApplicationContext(), "item 1", Toast.LENGTH_SHORT).show();
-			contentFrag = new BpartnerFragment();
+			contentFrag = bpFragment;
 			break;
 		}
 		
+		changeContentFragment();
+
+	}
+
+	private void changeContentFragment() {
 		t = this.getSupportFragmentManager().beginTransaction();
 		t.replace(R.id.content_frame, contentFrag );
 		t.addToBackStack("a");
 		t.commit();
-
 	}
+
+	
 }

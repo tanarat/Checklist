@@ -27,6 +27,11 @@
             android:authorities="org.silk.checklist.db.contentprovider"
             android:exported="false"
             />
+        <activity 
+            android:name=".activity.BpartnerDetailActivity"
+            
+           
+            ></activity>
     </application>
 
 </manifest>

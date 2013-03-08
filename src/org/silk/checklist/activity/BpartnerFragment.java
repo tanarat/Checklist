@@ -4,20 +4,26 @@ import org.silk.checklist.R;
 import org.silk.checklist.model.Bpartner;
 import org.silk.checklist.model.BpartnerBook;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class BpartnerFragment extends Fragment{
+public class BpartnerFragment extends Fragment implements OnItemClickListener{
 	private String tag = "BpartnerFragment";
 	private BpAdapter mAdapter;
 	private ListView lvList;
 	private BpartnerBook mBpBook;
+
+	
 
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,7 +33,27 @@ public class BpartnerFragment extends Fragment{
 		lvList = (ListView) view.findViewById(R.id.list);
 		mAdapter = new BpAdapter();
 		lvList.setAdapter(mAdapter);
+		lvList.setOnItemClickListener(this);
+		
 		return view;
+	}
+
+
+//	@Override
+//	public void onCreate(Bundle savedInstanceState) {
+//		// TODO Auto-generated method stub
+//		super.onCreate(savedInstanceState);
+//		if(savedInstanceState != null){
+//			
+//		}
+//	}
+
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+
 	}
 
 
@@ -69,6 +95,39 @@ public class BpartnerFragment extends Fragment{
 		private final class ViewHolder{
 			TextView tvTitle,tvDesc1,tvDesc2;
 		}
+	}
+	private BpartnerListener bpListener;
+	public interface BpartnerListener{
+		public void onBpartnerSelected(Bpartner bpartner);
+	}
+	
+	@Override
+	public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+	
+		Intent intent = new Intent(getActivity(),BpartnerDetailActivity.class);
+		intent.putExtra("bpartnerId", id);
+		startActivityForResult(intent, BPARTNER_DETAIL);
+		
+	}
+	
+	public static final int BPARTNER_DETAIL = 100;
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		
+		if(requestCode == BPARTNER_DETAIL && resultCode == Activity.RESULT_OK){
+			if(data.getBooleanExtra("detailChanged", false)){
+				mAdapter.notifyDataSetChanged();
+			}
+		}
+	}
+
+
+	public BpartnerListener getBpListener() {
+		return bpListener;
+	}
+	public void setBpListener(BpartnerListener bpListener) {
+		this.bpListener = bpListener;
 	}
 
 
