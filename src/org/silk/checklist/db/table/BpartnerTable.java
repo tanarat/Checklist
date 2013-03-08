@@ -9,6 +9,7 @@ public final class BpartnerTable {
     public static class BpartnerColumns implements BaseColumns {
         public static final String COMPANY_NAME = "company_name_column";
         public static final String ADDRESS = "address_column";
+        public static final String PHONE = "phone_column";
     }
 
 
@@ -18,7 +19,8 @@ public final class BpartnerTable {
         sb.append("CREATE TABLE " + BpartnerTable.TABLE_NAME + " (");
         sb.append(BaseColumns._ID + " INTEGER PRIMARY KEY, ");
         sb.append(BpartnerColumns.COMPANY_NAME + " TEXT, ");
-        sb.append(BpartnerColumns.ADDRESS + " TEXT");
+        sb.append(BpartnerColumns.ADDRESS + " TEXT, ");
+        sb.append(BpartnerColumns.PHONE + " TEXT ");
         sb.append(");");
         db.execSQL(sb.toString());
     }

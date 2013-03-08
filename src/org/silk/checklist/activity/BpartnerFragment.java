@@ -1,15 +1,11 @@
 package org.silk.checklist.activity;
 
-import java.util.List;
-
 import org.silk.checklist.R;
-import org.silk.checklist.db.Dao;
-import org.silk.checklist.db.Provider;
 import org.silk.checklist.model.Bpartner;
+import org.silk.checklist.model.BpartnerBook;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,23 +15,16 @@ import android.widget.TextView;
 
 public class BpartnerFragment extends Fragment{
 	private String tag = "BpartnerFragment";
-//	private BpartnerCursorAdapter mAdapter;
 	private BpAdapter mAdapter;
 	private ListView lvList;
-	private Dao<Bpartner> bpDao;
-	List<Bpartner> bpList;
-	
-	
+	private BpartnerBook mBpBook;
 
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		bpDao = new Dao<Bpartner>(Bpartner.class, getActivity().getApplicationContext(), Provider.BPARTNER_CONTENT_URI);
-		bpList = bpDao.get(null, null);
-		Log.i(tag, "[onCreateView]: bpList size :" + bpList.size());
+		mBpBook = new BpartnerBook(getActivity().getApplicationContext());
 		
 		View view = inflater.inflate(R.layout.bpartner_list, null);
 		lvList = (ListView) view.findViewById(R.id.list);
-//		bpartnerAdapter = new BpartnerCursorAdapter(getActivity().getApplicationContext());
 		mAdapter = new BpAdapter();
 		lvList.setAdapter(mAdapter);
 		return view;
@@ -46,25 +35,21 @@ public class BpartnerFragment extends Fragment{
 
 		@Override
 		public int getCount() {
-			// TODO Auto-generated method stub
-			return bpList.size();
+			return mBpBook.count();
 		}
 
 		@Override
 		public Object getItem(int position) {
-			// TODO Auto-generated method stub
-			return bpList.get(position);
+			return mBpBook.getBpartner(position);
 		}
 
 		@Override
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
-			return bpList.get(position).getId();
+			return ((Bpartner)getItem(position)).getId();
 		}
 
 		@Override
 		public View getView(int position, View view, ViewGroup parent) {
-			// TODO Auto-generated method stub
 			ViewHolder holder;
 			if(view == null){
 				view = LayoutInflater.from(getActivity().getApplicationContext()).inflate(R.layout.item_row_1, parent,false);
@@ -78,6 +63,7 @@ public class BpartnerFragment extends Fragment{
 			}
 			Bpartner bp = (Bpartner) getItem(position);
 			holder.tvTitle.setText(bp.getCompanyName());
+			holder.tvDesc2.setText(bp.getPhone());
 			return view;
 		}
 		private final class ViewHolder{

@@ -14,6 +14,7 @@ public class Bpartner extends ModelBase {
     private int id;
     private String companyName;
     private String address;
+    private String phone;
 
 
     public Bpartner() {
@@ -30,6 +31,7 @@ public class Bpartner extends ModelBase {
         this.id = cursor.getInt(cursor.getColumnIndex(BaseColumns._ID));
         this.companyName = cursor.getString(cursor.getColumnIndex(BpartnerTable.BpartnerColumns.COMPANY_NAME));
         this.address = cursor.getString(cursor.getColumnIndex(BpartnerTable.BpartnerColumns.ADDRESS));
+        this.phone = cursor.getString(cursor.getColumnIndex(BpartnerTable.BpartnerColumns.PHONE));
         this.context = context;
     }
 
@@ -38,6 +40,7 @@ public class Bpartner extends ModelBase {
         ContentValues values = new ContentValues();
         values.put(BpartnerTable.BpartnerColumns.COMPANY_NAME, this.companyName);
         values.put(BpartnerTable.BpartnerColumns.ADDRESS, this.address);
+        values.put(BpartnerTable.BpartnerColumns.PHONE, this.phone);
         return values;
     }
 
@@ -54,6 +57,8 @@ public class Bpartner extends ModelBase {
 		setId(Integer.parseInt(token.nextToken()));
 		setCompanyName(token.nextToken());
 		setAddress(token.nextToken());
+		if(token.hasMoreTokens())
+			setPhone(token.nextToken());
 	}
 
 	public String getCompanyName() {
@@ -74,6 +79,14 @@ public class Bpartner extends ModelBase {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 
