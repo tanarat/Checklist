@@ -45,7 +45,7 @@ public class CopyOfMainActivity extends SlidingFragmentActivity {
 		getSlidingMenu().setMode(SlidingMenu.LEFT);
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 		
-		setContentView(R.layout.content_frame);
+//		setContentView(R.layout.content_frame);
 //		getSupportFragmentManager()
 //		.beginTransaction()
 //		.replace(R.id.content_frame, new SampleListFragment())

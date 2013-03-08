@@ -3,35 +3,29 @@ package org.silk.checklist.activity;
 import org.silk.checklist.ChecklistApp;
 import org.silk.checklist.LoadSampleDataTask;
 import org.silk.checklist.R;
+import org.silk.checklist.activity.ListMenuFragment.OnListMenuSelectedListener;
 import org.silk.checklist.model.ModelBase;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
-
-
 import com.slidingmenu.lib.SlidingMenu;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class MainActivity extends SlidingFragmentActivity 
-//implements
-//		LeftMenuFragment.OnLeftMenuItemSelectedListener,
-//		PlaceFragment.OnItemSelectedListener 
-		{
+public class MainActivity extends SlidingFragmentActivity implements OnListMenuSelectedListener {
 	String tag = "MainActivity";
 	ListMenuFragment menuFrag;
-
+	Fragment contentFrag;
 	SlidingMenu sm;
 
 	FragmentTransaction t;
@@ -49,12 +43,16 @@ public class MainActivity extends SlidingFragmentActivity
 		Log.i(tag, "onCreate");
 		// set the Content View
 		setContentView(R.layout.activity_main);
+		getSupportFragmentManager()
+		.beginTransaction()
+		.replace(R.id.content_frame, new SampleListFragment())
+		.commit();
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
 		initSlidingMenu();
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
+		menuFrag.setOnListMenuSelectedListener(this);
 	}
 
 	private void initSlidingMenu() {
@@ -162,6 +160,28 @@ public class MainActivity extends SlidingFragmentActivity
 						mLoadSampleTask.execute();
 					}
 				}).setNegativeButton(R.string.button_cancle, null).show();
+
+	}
+
+	@Override
+	public void onListMenuSelected(int position) {
+		// TODO Auto-generated method stub
+		toggle();
+		switch(position){
+		case 0:
+			Toast.makeText(getApplicationContext(), "item 0", Toast.LENGTH_SHORT).show();
+			contentFrag = new ChecklistFragment();
+			break;
+		case 1:
+			Toast.makeText(getApplicationContext(), "item 1", Toast.LENGTH_SHORT).show();
+			contentFrag = new BpartnerFragment();
+			break;
+		}
+		
+		t = this.getSupportFragmentManager().beginTransaction();
+		t.replace(R.id.content_frame, contentFrag );
+		t.addToBackStack("a");
+		t.commit();
 
 	}
 }
