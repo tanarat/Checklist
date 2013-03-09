@@ -13,7 +13,11 @@ abstract public class ModelBase {
         
         abstract public void fromCursor(Cursor cursor, Context context);
         abstract public int getId();
+        abstract public String getTitle();
+        abstract public String getDescription1();
+        abstract public String getDescription2();
         abstract public ContentValues toContentValues();
         abstract public void fromCSV(String csvLine);
+        
 
 }

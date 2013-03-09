@@ -3,9 +3,7 @@ package org.silk.checklist.activity;
 import org.silk.checklist.ChecklistApp;
 import org.silk.checklist.LoadSampleDataTask;
 import org.silk.checklist.R;
-import org.silk.checklist.activity.BpartnerFragment.BpartnerListener;
 import org.silk.checklist.activity.ListMenuFragment.OnListMenuSelectedListener;
-import org.silk.checklist.model.Bpartner;
 import org.silk.checklist.model.ModelBase;
 
 import android.app.AlertDialog;
@@ -14,7 +12,6 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;

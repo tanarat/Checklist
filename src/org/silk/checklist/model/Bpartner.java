@@ -16,6 +16,7 @@ public class Bpartner extends ModelBase {
     private String address;
     private String phone;
 
+    private boolean checked;
 
     public Bpartner() {
         super();
@@ -87,6 +88,32 @@ public class Bpartner extends ModelBase {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public boolean isChecked() {
+		return checked;
+	}
+
+	public void setChecked(boolean checked) {
+		this.checked = checked;
+	}
+
+	@Override
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return companyName;
+	}
+
+	@Override
+	public String getDescription1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription2() {
+		// TODO Auto-generated method stub
+		return phone;
 	}
 
 

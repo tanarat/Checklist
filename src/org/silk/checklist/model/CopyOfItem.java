@@ -75,5 +75,23 @@ public class CopyOfItem extends ModelBase {
 		return getId() + " " + getItemTitle();
 	}
 
+	@Override
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

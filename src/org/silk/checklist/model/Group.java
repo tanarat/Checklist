@@ -101,5 +101,23 @@ public class Group extends ModelBase {
 		this.id = id;
 	}
 
+	@Override
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

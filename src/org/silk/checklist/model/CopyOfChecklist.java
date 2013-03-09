@@ -96,5 +96,23 @@ public class CopyOfChecklist extends ModelBase {
 //		chkl.setItemIds(itemIds);
 	}
 
+	@Override
+	public String getTitle() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDescription2() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
