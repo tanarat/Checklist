@@ -17,7 +17,11 @@ public class ChecklistApp extends Application{
 	public static final int MIN_PROGRESS_VALUE = 0;
 	public static final int MAX_PROGRESS_VALUE = 100;
 	
-
+	public static final int HALQ_CHECKLIST_MENU = 10;
+	
+	public static final int CURSOR_ID_BPARTNER = 1000;
+	public static final int CURSOR_ID_AUDITOR = 1001;
+	public static final int CURSOR_ID_CHECKLIST = 1002;
 	
 	
 	@Override

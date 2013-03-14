@@ -61,7 +61,7 @@ public class ChecklistItem extends ModelBase {
 				ChecklistApp.CSV_DELIMITER);
 		int checklistId = Integer.parseInt(token.nextToken());
 		int itemId = Integer.parseInt(token.nextToken());
-		setId(checklistId);
+		setChecklistId(checklistId);
 		setItemId(itemId);
 
 	}
@@ -86,22 +86,22 @@ public class ChecklistItem extends ModelBase {
 		this.id = id;
 	}
 
-	@Override
-	public String getTitle() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDescription1() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDescription2() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public String getTitle() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public String getDescription1() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public String getDescription2() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

@@ -53,15 +53,15 @@ public class Auditor extends ModelBase {
 				ChecklistApp.CSV_DELIMITER);
 
 		setId(Integer.parseInt(token.nextToken()));
-		setAuditorName(token.nextToken());
+		setName(token.nextToken());
 		
 	}
 
-	public String getAuditorName() {
+	public String getName() {
 		return auditorName;
 	}
 
-	public void setAuditorName(String auditorName) {
+	public void setName(String auditorName) {
 		this.auditorName = auditorName;
 	}
 
@@ -72,20 +72,20 @@ public class Auditor extends ModelBase {
 	@Override
 	public String getTitle() {
 		// TODO Auto-generated method stub
-		return null;
+		return auditorName;
 	}
 
-	@Override
-	public String getDescription1() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDescription2() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public String getDescription1() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public String getDescription2() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 
 }

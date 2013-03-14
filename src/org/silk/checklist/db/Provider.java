@@ -1,6 +1,10 @@
 package org.silk.checklist.db;
 
 import org.silk.checklist.db.table.*;
+import org.silk.checklist.model.Auditor;
+import org.silk.checklist.model.Bpartner;
+import org.silk.checklist.model.Checklist;
+import org.silk.checklist.model.Sheet;
 
 import android.content.ContentProvider;
 import android.content.ContentResolver;
@@ -30,6 +34,7 @@ public class Provider extends ContentProvider {
         sURIMatcher.addURI(AUTHORITY, BPARTNER_PATH + "/#", BPARTNER_ID);
     }
 
+    /*
     private static final int GROUPS = 1003;
     private static final int GROUP_ID = 1004;
     public static final String GROUP_PATH = "Groups";
@@ -40,7 +45,7 @@ public class Provider extends ContentProvider {
         sURIMatcher.addURI(AUTHORITY, GROUP_PATH, GROUPS);
         sURIMatcher.addURI(AUTHORITY, GROUP_PATH + "/#", GROUP_ID);
     }
-
+     */
     private static final int CHECKLISTS = 1005;
     private static final int CHECKLIST_ID = 1006;
     public static final String CHECKLIST_PATH = "Checklists";
@@ -108,6 +113,18 @@ public class Provider extends ContentProvider {
     }
 
 
+    public static Uri getContentUri(Class clazz){
+    	if(clazz == Bpartner.class)
+    		return BPARTNER_CONTENT_URI;
+    	if(clazz == Auditor.class)
+    		return AUDITOR_CONTENT_URI;
+    	if(clazz == Checklist.class)
+    		return CHECKLIST_CONTENT_URI;
+    	if(clazz == Sheet.class)
+    		return SHEET_CONTENT_URI;
+    	else
+    		return null;
+    }
 
     @Override
     public boolean onCreate() {
@@ -124,10 +141,10 @@ public class Provider extends ContentProvider {
             return BPARTNER_CONTENT_TYPE;
         case BPARTNER_ID:
             return BPARTNER_CONTENT_ITEM_TYPE;
-        case GROUPS:
-            return GROUP_CONTENT_TYPE;
-        case GROUP_ID:
-            return GROUP_CONTENT_ITEM_TYPE;
+//        case GROUPS:
+//            return GROUP_CONTENT_TYPE;
+//        case GROUP_ID:
+//            return GROUP_CONTENT_ITEM_TYPE;
         case CHECKLISTS:
             return CHECKLIST_CONTENT_TYPE;
         case CHECKLIST_ID:
@@ -165,10 +182,10 @@ public class Provider extends ContentProvider {
             id = database.insert(BpartnerTable.TABLE_NAME, null, values);
             getContext().getContentResolver().notifyChange(uri, null);
             return Uri.parse("content://" + AUTHORITY + "/" + BPARTNER_PATH + "/" + id);
-        case GROUPS:
-            id = database.insert(GroupTable.TABLE_NAME, null, values);
-            getContext().getContentResolver().notifyChange(uri, null);
-            return Uri.parse("content://" + AUTHORITY + "/" + GROUP_PATH + "/" + id);
+//        case GROUPS:
+//            id = database.insert(GroupTable.TABLE_NAME, null, values);
+//            getContext().getContentResolver().notifyChange(uri, null);
+//            return Uri.parse("content://" + AUTHORITY + "/" + GROUP_PATH + "/" + id);
         case CHECKLISTS:
             id = database.insert(ChecklistTable.TABLE_NAME, null, values);
             getContext().getContentResolver().notifyChange(uri, null);
@@ -210,13 +227,13 @@ public class Provider extends ContentProvider {
             queryBuilder.setTables(BpartnerTable.TABLE_NAME);
             queryBuilder.appendWhere(BaseColumns._ID + "=" + uri.getLastPathSegment());
             break;
-        case GROUPS:
-            queryBuilder.setTables(GroupTable.TABLE_NAME);
-            break;
-        case GROUP_ID:
-            queryBuilder.setTables(GroupTable.TABLE_NAME);
-            queryBuilder.appendWhere(BaseColumns._ID + "=" + uri.getLastPathSegment());
-            break;
+//        case GROUPS:
+//            queryBuilder.setTables(GroupTable.TABLE_NAME);
+//            break;
+//        case GROUP_ID:
+//            queryBuilder.setTables(GroupTable.TABLE_NAME);
+//            queryBuilder.appendWhere(BaseColumns._ID + "=" + uri.getLastPathSegment());
+//            break;
         case CHECKLISTS:
             queryBuilder.setTables(ChecklistTable.TABLE_NAME);
             break;
@@ -283,17 +300,17 @@ public class Provider extends ContentProvider {
                 rowsDeleted = database.delete(BpartnerTable.TABLE_NAME, BaseColumns._ID + "=" + BpartnerId + " AND " + selection, selectionArgs);
             }
             break;
-        case GROUPS:
-            rowsDeleted = database.delete(GroupTable.TABLE_NAME, selection, selectionArgs);
-            break;
-        case GROUP_ID:
-            String GroupId = uri.getLastPathSegment();
-            if (TextUtils.isEmpty(selection)) {
-                rowsDeleted = database.delete(GroupTable.TABLE_NAME, BaseColumns._ID + "=" + GroupId, null);
-            } else {
-                rowsDeleted = database.delete(GroupTable.TABLE_NAME, BaseColumns._ID + "=" + GroupId + " AND " + selection, selectionArgs);
-            }
-            break;
+//        case GROUPS:
+//            rowsDeleted = database.delete(GroupTable.TABLE_NAME, selection, selectionArgs);
+//            break;
+//        case GROUP_ID:
+//            String GroupId = uri.getLastPathSegment();
+//            if (TextUtils.isEmpty(selection)) {
+//                rowsDeleted = database.delete(GroupTable.TABLE_NAME, BaseColumns._ID + "=" + GroupId, null);
+//            } else {
+//                rowsDeleted = database.delete(GroupTable.TABLE_NAME, BaseColumns._ID + "=" + GroupId + " AND " + selection, selectionArgs);
+//            }
+//            break;
         case CHECKLISTS:
             rowsDeleted = database.delete(ChecklistTable.TABLE_NAME, selection, selectionArgs);
             break;
@@ -383,17 +400,17 @@ public class Provider extends ContentProvider {
                 rowsUpdated = database.update(BpartnerTable.TABLE_NAME, values, BaseColumns._ID + "=" + BpartnerId + " AND " + selection, selectionArgs);
             }
             break;
-        case GROUPS:
-            rowsUpdated = database.update(GroupTable.TABLE_NAME, values, selection, selectionArgs);
-            break;
-        case GROUP_ID:
-            String GroupId = uri.getLastPathSegment();
-            if (TextUtils.isEmpty(selection)) {
-                rowsUpdated = database.update(GroupTable.TABLE_NAME, values, BaseColumns._ID + "=" + GroupId, null);
-            } else {
-                rowsUpdated = database.update(GroupTable.TABLE_NAME, values, BaseColumns._ID + "=" + GroupId + " AND " + selection, selectionArgs);
-            }
-            break;
+//        case GROUPS:
+//            rowsUpdated = database.update(GroupTable.TABLE_NAME, values, selection, selectionArgs);
+//            break;
+//        case GROUP_ID:
+//            String GroupId = uri.getLastPathSegment();
+//            if (TextUtils.isEmpty(selection)) {
+//                rowsUpdated = database.update(GroupTable.TABLE_NAME, values, BaseColumns._ID + "=" + GroupId, null);
+//            } else {
+//                rowsUpdated = database.update(GroupTable.TABLE_NAME, values, BaseColumns._ID + "=" + GroupId + " AND " + selection, selectionArgs);
+//            }
+//            break;
         case CHECKLISTS:
             rowsUpdated = database.update(ChecklistTable.TABLE_NAME, values, selection, selectionArgs);
             break;

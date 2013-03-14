@@ -12,7 +12,8 @@ import android.database.Cursor;
 public class Group extends ModelBase {
     private Context context;
     private int id;
-    private String groupKey;
+//    private int groupId;
+	private String groupKey;
     private String groupName;
     private int parentGroupId;
     private int baseGroupId;
@@ -30,6 +31,8 @@ public class Group extends ModelBase {
     @Override
     public void fromCursor(Cursor cursor, Context context) {
         this.id = cursor.getInt(cursor.getColumnIndex(BaseColumns._ID));
+//        this.groupId = cursor.getInt(cursor.getColumnIndex(GroupTable.GroupColumns.GROUP_ID));
+        this.id = cursor.getInt(cursor.getColumnIndex(BaseColumns._ID));
         this.groupKey = cursor.getString(cursor.getColumnIndex(GroupTable.GroupColumns.GROUP_KEY));
         this.groupName = cursor.getString(cursor.getColumnIndex(GroupTable.GroupColumns.GROUP_NAME));
         this.parentGroupId = cursor.getInt(cursor.getColumnIndex(GroupTable.GroupColumns.PARENT_GROUP_ID));
@@ -40,6 +43,9 @@ public class Group extends ModelBase {
     @Override
     public ContentValues toContentValues() {
         ContentValues values = new ContentValues();
+//        values.put(GroupTable.GroupColumns.GROUP_ID, this.groupId);
+//        values.put(BaseColumns._ID, this.groupId);
+        values.put(BaseColumns._ID, this.id);
         values.put(GroupTable.GroupColumns.GROUP_KEY, this.groupKey);
         values.put(GroupTable.GroupColumns.GROUP_NAME, this.groupName);
         values.put(GroupTable.GroupColumns.PARENT_GROUP_ID, this.parentGroupId);
@@ -57,6 +63,7 @@ public class Group extends ModelBase {
 	public void fromCSV(String csvLine) {
 		StringTokenizer token = new StringTokenizer(csvLine,
 				ChecklistApp.CSV_DELIMITER);
+//		setGroupId(Integer.parseInt(token.nextToken()));
 		setId(Integer.parseInt(token.nextToken()));
 		setGroupKey(token.nextToken());
 		setGroupName(token.nextToken());
@@ -104,7 +111,7 @@ public class Group extends ModelBase {
 	@Override
 	public String getTitle() {
 		// TODO Auto-generated method stub
-		return null;
+		return groupKey + " " + groupName;
 	}
 
 	@Override
@@ -118,6 +125,12 @@ public class Group extends ModelBase {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+//	public int getGroupId() {
+//		return groupId;
+//	}
+//
+//	public void setGroupId(int groupId) {
+//		this.groupId = groupId;
+//	}
 
 }

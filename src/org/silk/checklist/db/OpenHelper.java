@@ -24,7 +24,7 @@ public class OpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         BpartnerTable.onCreate(db);
-        GroupTable.onCreate(db);
+//        GroupTable.onCreate(db);
         ChecklistTable.onCreate(db);
         ChecklistItemTable.onCreate(db);
         ItemTable.onCreate(db);
@@ -36,7 +36,7 @@ public class OpenHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         BpartnerTable.onUpgrade(db, oldVersion, newVersion);
-        GroupTable.onUpgrade(db, oldVersion, newVersion);
+//        GroupTable.onUpgrade(db, oldVersion, newVersion);
         ChecklistTable.onUpgrade(db, oldVersion, newVersion);
         ChecklistItemTable.onUpgrade(db, oldVersion, newVersion);
         ItemTable.onUpgrade(db, oldVersion, newVersion);

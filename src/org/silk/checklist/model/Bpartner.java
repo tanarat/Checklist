@@ -10,7 +10,13 @@ import android.content.Context;
 import android.database.Cursor;
 
 public class Bpartner extends ModelBase {
-    private Context context;
+    @Override
+	public String toString() {
+		return companyName;
+	}
+
+
+	private Context context;
     private int id;
     private String companyName;
     private String address;
@@ -104,11 +110,6 @@ public class Bpartner extends ModelBase {
 		return companyName;
 	}
 
-	@Override
-	public String getDescription1() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public String getDescription2() {

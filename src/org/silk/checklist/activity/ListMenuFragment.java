@@ -31,15 +31,23 @@ public class ListMenuFragment extends Fragment implements OnItemClickListener {
 		View view = inflater.inflate(R.layout.left_menu, null);
 		lvMenu = (ListView) view.findViewById(R.id.lvMenuItem);
 		lvMenu.setOnItemClickListener(this);
+		if(menuSelectedListener != null){
+			menuSelectedListener.onListMenuSelected(0);
+		}
 		return view;
 	}
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		ListAdapter adapter = new ListAdapter(getActivity());
-		adapter.add(new MenuItem(getString(R.string.menu_checklist),R.drawable.ic_search));
-		adapter.add(new MenuItem(getString(R.string.menu_bpartner),R.drawable.ic_search));
+//		adapter.add(new MenuItem(getString(R.string.menu_sheet), R.drawable.ic_search));
+		adapter.add(new MenuItem(getString(R.string.main_menu_halq_checklist), R.drawable.ic_search));
+
+//		adapter.add(new MenuItem(getString(R.string.menu_checklist),R.drawable.ic_search));
+//		adapter.add(new MenuItem(getString(R.string.menu_bpartner),R.drawable.ic_search));
+//		adapter.add(new MenuItem(getString(R.string.menu_auditor), R.drawable.ic_search));
 		lvMenu.setAdapter(adapter);
+		
 	}
 
 	private class MenuItem {

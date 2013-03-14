@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.silk.checklist.db.Dao;
+import org.silk.checklist.dao.Dao;
 import org.silk.checklist.db.Provider;
 import org.silk.checklist.model.Auditor;
 import org.silk.checklist.model.Bpartner;
@@ -28,9 +28,9 @@ public class LoadSampleDataTask<T extends ModelBase> extends AsyncTask<Void, Int
 	private Dao mDao;
 	
 	public static Class[] clazzes= {Item.class, Checklist.class, ChecklistItem.class, Auditor.class, Bpartner.class, Group.class};
-	public static String[] fileNames = {"Item.csv", "Checklist.csv", "Checklist_Item.csv", "Auditor.csv", "Bpartner.csv", "Group.csv"};
+	public static String[] fileNames = {"Item.csv", "Checklist.csv", "Checklist_Item.csv", "Auditor.csv", "Bpartner.csv"};
 	public static Uri[] contentUris = {Provider.ITEM_CONTENT_URI, Provider.CHECKLIST_CONTENT_URI, Provider.CHECKLIST_ITEM_CONTENT_URI,
-										Provider.AUDITOR_CONTENT_URI, Provider.BPARTNER_CONTENT_URI, Provider.GROUP_CONTENT_URI};
+										Provider.AUDITOR_CONTENT_URI, Provider.BPARTNER_CONTENT_URI};
 	
 	public LoadSampleDataTask(Context context) {
 		super();
@@ -52,7 +52,7 @@ public class LoadSampleDataTask<T extends ModelBase> extends AsyncTask<Void, Int
 	}
 	private void updateDB(List<T> list, int index){
 		Dao dao = new Dao(clazzes[index], context, contentUris[index]);
-		dao.destroy();
+//		dao.destroy();
 		for (Iterator<T> iterator = list.iterator(); iterator.hasNext();) {
 			T t = (T) iterator.next();
 			dao.insert(t);

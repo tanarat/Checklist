@@ -22,7 +22,7 @@ public class ModelBaseListCursorAdapter<T extends ModelBase> extends CursorAdapt
 	private Set<Integer> checkedItemSet = new HashSet<Integer>();
 	private Class<T> mClazz;
 	
-	
+	private int rowViewRes = R.layout.item_row_1;
 	
 	public void setCheckListener(ItemCheckedListener checkListener) {
 		this.checkListener = checkListener;
@@ -62,7 +62,8 @@ public class ModelBaseListCursorAdapter<T extends ModelBase> extends CursorAdapt
 
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		View view = LayoutInflater.from(context).inflate(R.layout.item_row_1, parent,false);
+//		View view = LayoutInflater.from(context).inflate(R.layout.item_row_1, parent,false);
+		View view = LayoutInflater.from(context).inflate(getRowViewRes(), parent,false);
 		ViewHolder holder = new ViewHolder();
 		holder.tvTitle = (TextView) view.findViewById(R.id.tvTitle);
 		holder.tvDesc1 = (TextView) view.findViewById(R.id.tvDesc1);
@@ -74,11 +75,12 @@ public class ModelBaseListCursorAdapter<T extends ModelBase> extends CursorAdapt
 			@Override
 			public void onClick(View v) {
 				CheckBox cb = (CheckBox) v;
-				Bpartner bpartner = (Bpartner) cb.getTag();
+//				Bpartner bpartner = (Bpartner) cb.getTag();
+				T t = (T)cb.getTag();
 				if(cb.isChecked()){
-					checkedItemSet.add(bpartner.getId());
+					checkedItemSet.add(t.getId());
 				}else{
-					checkedItemSet.remove(bpartner.getId());
+					checkedItemSet.remove(t.getId());
 				}
 				notifyCheckItemChanged();
 			}
@@ -119,6 +121,14 @@ public class ModelBaseListCursorAdapter<T extends ModelBase> extends CursorAdapt
 		if(checkListener != null){
 			checkListener.onCheckItemChecked();
 		}
+	}
+
+	public int getRowViewRes() {
+		return rowViewRes;
+	}
+
+	public void setRowViewRes(int rowViewRes) {
+		this.rowViewRes = rowViewRes;
 	}
 	
 }

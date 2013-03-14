@@ -4,8 +4,17 @@ import org.silk.checklist.ChecklistApp;
 import org.silk.checklist.LoadSampleDataTask;
 import org.silk.checklist.R;
 import org.silk.checklist.activity.ListMenuFragment.OnListMenuSelectedListener;
+import org.silk.checklist.activity.auditor.AuditorDetailActivity;
+import org.silk.checklist.activity.bpartner.BpartnerDetailActivity;
+import org.silk.checklist.activity.checklist.ChecklistDetailActivity;
+import org.silk.checklist.db.Provider;
+import org.silk.checklist.model.Auditor;
+import org.silk.checklist.model.Bpartner;
+import org.silk.checklist.model.Checklist;
 import org.silk.checklist.model.ModelBase;
+import org.silk.checklist.model.Sheet;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -29,7 +38,11 @@ public class MainActivity extends SlidingFragmentActivity implements OnListMenuS
 
 	FragmentTransaction t;
 
-	private BpartnerFragment bpFragment;
+//	private Fragment bpFragment;
+	private ContentFragment<Sheet> sheetContentFrag;
+	private ContentFragment<Checklist> checklistContentFrag;
+	private ContentFragment<Bpartner> bpartnerContentFrag;
+	private ContentFragment<Auditor> auditorContentFrag;
 	
 	public MainActivity() {
 		// super(R.string.app_name);
@@ -61,9 +74,37 @@ public class MainActivity extends SlidingFragmentActivity implements OnListMenuS
 
 		menuFrag.setOnListMenuSelectedListener(this);
 		
+		checklistContentFrag = new ContentFragment<Checklist>();
+		checklistContentFrag.setModelClass(Checklist.class);
+		checklistContentFrag.setContentUri(Provider.CHECKLIST_CONTENT_URI);
+		checklistContentFrag.setDetailActivityClass(ChecklistDetailActivity.class);
+		checklistContentFrag.setTitleRes(R.string.checklist_list_title);
+		checklistContentFrag.setCursorId(0);
 		
-		bpFragment = new BpartnerFragment();
+
 		
+		bpartnerContentFrag = new ContentFragment<Bpartner>();
+		bpartnerContentFrag.setModelClass(Bpartner.class);
+		bpartnerContentFrag.setContentUri(Provider.BPARTNER_CONTENT_URI);
+		bpartnerContentFrag.setDetailActivityClass(BpartnerDetailActivity.class);
+		bpartnerContentFrag.setTitleRes(R.string.bpartner_list_title);
+		bpartnerContentFrag.setCursorId(1);
+		
+		
+		auditorContentFrag = new ContentFragment<Auditor>();
+		auditorContentFrag.setModelClass(Auditor.class);
+		auditorContentFrag.setContentUri(Provider.AUDITOR_CONTENT_URI);
+		auditorContentFrag.setDetailActivityClass(AuditorDetailActivity.class);
+		auditorContentFrag.setTitleRes(R.string.auditor_list_title);
+		bpartnerContentFrag.setCursorId(2);
+		
+
+		sheetContentFrag = new ContentFragment<Sheet>();
+		sheetContentFrag.setModelClass(Sheet.class);
+		sheetContentFrag.setContentUri(Provider.SHEET_CONTENT_URI);
+		sheetContentFrag.setDetailActivityClass(SheetDetailActivity.class);
+		sheetContentFrag.setTitleRes(R.string.sheet_list_title);
+		sheetContentFrag.setCursorId(3);
 	}
 
 	
@@ -159,13 +200,23 @@ public class MainActivity extends SlidingFragmentActivity implements OnListMenuS
 		toggle();
 		switch(position){
 		case 0:
-			Toast.makeText(getApplicationContext(), "item 0", Toast.LENGTH_SHORT).show();
-			contentFrag = new ChecklistFragment();
-			break;
-		case 1:
-			Toast.makeText(getApplicationContext(), "item 1", Toast.LENGTH_SHORT).show();
-			contentFrag = bpFragment;
-			break;
+			contentFrag = new HalQChecklistMenu();
+//			Toast.makeText(getApplicationContext(), "item 3", Toast.LENGTH_SHORT).show();
+//			contentFrag = sheetContentFrag;
+//			break;
+//		case 1:
+//			Toast.makeText(getApplicationContext(), "item 0", Toast.LENGTH_SHORT).show();
+//			contentFrag = checklistContentFrag;
+//			break;
+//		case 2:
+//			Toast.makeText(getApplicationContext(), "item 1", Toast.LENGTH_SHORT).show();
+//			contentFrag = bpartnerContentFrag;
+//			break;
+//		case 3:
+//			Toast.makeText(getApplicationContext(), "item 2", Toast.LENGTH_SHORT).show();
+//			contentFrag = auditorContentFrag;
+//			break;
+		
 		}
 		
 		changeContentFragment();

@@ -6,13 +6,14 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="16" />
 
     <application
+        android:name="org.silk.checklist.ChecklistApp"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" android:name="ChecklistApp">
+        android:theme="@style/AppTheme" >
         <activity
             android:name="org.silk.checklist.activity.MainActivity"
             android:label="@string/app_name" >
@@ -22,16 +23,35 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <provider 
-            android:name=".db.Provider"
+
+        <provider
+            android:name="org.silk.checklist.db.Provider"
             android:authorities="org.silk.checklist.db.contentprovider"
-            android:exported="false"
-            />
-        <activity 
-            android:name=".activity.BpartnerDetailActivity"
-            
-           
-            ></activity>
+            android:exported="false" />
+
+        <activity android:name="org.silk.checklist.activity.bpartner.BpartnerDetailActivity" >
+        </activity>
+        <activity android:name="org.silk.checklist.activity.auditor.AuditorDetailActivity" >
+        </activity>
+        <activity android:name="org.silk.checklist.activity.checklist.ChecklistDetailActivity" >
+        </activity>
+        <activity android:name="org.silk.checklist.activity.SheetDetailActivity" >
+        </activity>
+        <activity android:name="org.silk.checklist.activity.bpartner.BpartnerListActivity" >
+        </activity>
+        <activity android:name="org.silk.checklist.activity.auditor.AuditorListActivity" >
+        </activity>
+        <activity android:name="org.silk.checklist.activity.checklist.ChecklistListActivity" >
+        </activity>
+        <activity
+            android:name="org.silk.checklist.activity.checklist.ChecklistDetailActivityTabView"
+            android:label="@string/title_activity_checklist_detail_activity_tab_view" >
+        </activity>
+        <activity
+            android:name="org.silk.checklist.activity.checklist.ItemListActivity"
+            android:label="@string/title_activity_item_list" >
+        </activity>
+        <activity android:name=".activity.checklist.ChecklistDetailActivityTabView2"></activity>
     </application>
 
 </manifest>

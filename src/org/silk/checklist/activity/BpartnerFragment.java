@@ -1,7 +1,8 @@
 package org.silk.checklist.activity;
 
 import org.silk.checklist.R;
-import org.silk.checklist.db.Dao;
+import org.silk.checklist.activity.bpartner.BpartnerDetailActivity;
+import org.silk.checklist.dao.Dao;
 import org.silk.checklist.db.ItemCheckedListener;
 import org.silk.checklist.db.ModelBaseListCursorAdapter;
 import org.silk.checklist.db.Provider;
@@ -43,7 +44,7 @@ public class BpartnerFragment extends Fragment implements OnClickListener,
 		//for delete operation
 		bpDao = new Dao<Bpartner>(Bpartner.class, getActivity(), Provider.BPARTNER_CONTENT_URI);
 
-		View view = inflater.inflate(R.layout.bpartner_list, null);
+		View view = inflater.inflate(R.layout.content_list, null);
 		btnNew = (Button) view.findViewById(R.id.btnNew);
 
 		btnNew.setOnClickListener(this);

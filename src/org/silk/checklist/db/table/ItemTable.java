@@ -4,12 +4,14 @@ import android.provider.BaseColumns;
 
 
 public final class ItemTable {
-    public static final String TABLE_NAME = "Item_table";
+    public static final String TABLE_NAME = "Item";
 
     public static class ItemColumns implements BaseColumns {
-        public static final String ITEM_TITLE = "item_title_column";
-        public static final String GROUP_ID = "group_id_column";
-        public static final String BASE_GROUP_ID = "base_group_id_column";
+    	public static final String ITEM_KEY = "key";
+        public static final String ITEM_TITLE = "title";
+        public static final String PARENT_ID = "parent_id";
+        public static final String BASE_ID = "base_id";
+        public static final String ITEM_TYPE = "type";
     }
 
 
@@ -18,9 +20,11 @@ public final class ItemTable {
         StringBuilder sb = new StringBuilder();
         sb.append("CREATE TABLE " + ItemTable.TABLE_NAME + " (");
         sb.append(BaseColumns._ID + " INTEGER PRIMARY KEY, ");
+        sb.append(ItemColumns.ITEM_KEY + " TEXT, ");
         sb.append(ItemColumns.ITEM_TITLE + " TEXT, ");
-        sb.append(ItemColumns.GROUP_ID + " INTEGER, ");
-        sb.append(ItemColumns.BASE_GROUP_ID + " INTEGER");
+        sb.append(ItemColumns.PARENT_ID + " INTEGER, ");
+        sb.append(ItemColumns.BASE_ID + " INTEGER, ");
+        sb.append(ItemColumns.ITEM_TYPE + " INTEGER");
         sb.append(");");
         db.execSQL(sb.toString());
     }
